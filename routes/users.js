@@ -1,9 +1,16 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const handleErrorAsync = require('../service/handleErrorAsync');
+const {isAuth,generateSendJWT} = require('../service/auth');
+const router = express.Router();
+const UserController = require("../controllers/usersController");
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+
+router.post('/sign_up', handleErrorAsync(UserController.signUp));
+
+router.post('/sign_in',handleErrorAsync(UserController.signIn));
+
+router.get('/profile/',isAuth, handleErrorAsync(UserController.getProfile));
+
+router.post('/updatePassword',isAuth,handleErrorAsync(UserController.updatePassword));
 
 module.exports = router;
