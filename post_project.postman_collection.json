@@ -1,0 +1,339 @@
+{
+	"info": {
+		"_postman_id": "97d933b0-b05d-46c7-b26c-86667bdbd62a",
+		"name": "post_project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7108139"
+	},
+	"item": [
+		{
+			"name": "取得所有貼文",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjZmOWI1M2U2YjZiNzQ2NjkxOTVlNCIsImlhdCI6MTcxODAyNjk1NiwiZXhwIjoxNzE4NjMxNzU2fQ.OCpf_qckj8NEHfPvKuEzXI6jupS2h-LhOoxSkg5UC_Q",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://post-project-jlrl.onrender.com/posts",
+					"protocol": "https",
+					"host": [
+						"post-project-jlrl",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"posts"
+					],
+					"query": [
+						{
+							"key": "timeSort",
+							"value": "desc",
+							"disabled": true
+						},
+						{
+							"key": "q",
+							"value": "奶茶",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新增單筆貼文",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjZmOWI1M2U2YjZiNzQ2NjkxOTVlNCIsImlhdCI6MTcxODAyNjk1NiwiZXhwIjoxNzE4NjMxNzU2fQ.OCpf_qckj8NEHfPvKuEzXI6jupS2h-LhOoxSkg5UC_Q",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"content\":\"明天要上班T_T\",\r\n    \"photo\":\"https://hips.hearstapps.com/hmg-prod/images/24411009-64ae617d83dcf.jpg?crop=0.733xw:1.00xh;0.139xw,0&resize=980:*\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://post-project-jlrl.onrender.com/posts",
+					"protocol": "https",
+					"host": [
+						"post-project-jlrl",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除登入者所有貼文",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjZmOWI1M2U2YjZiNzQ2NjkxOTVlNCIsImlhdCI6MTcxODAyNjk1NiwiZXhwIjoxNzE4NjMxNzU2fQ.OCpf_qckj8NEHfPvKuEzXI6jupS2h-LhOoxSkg5UC_Q",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "https://post-project-jlrl.onrender.com/posts",
+					"protocol": "https",
+					"host": [
+						"post-project-jlrl",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除單一貼文",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjZmOWI1M2U2YjZiNzQ2NjkxOTVlNCIsImlhdCI6MTcxODAyNjk1NiwiZXhwIjoxNzE4NjMxNzU2fQ.OCpf_qckj8NEHfPvKuEzXI6jupS2h-LhOoxSkg5UC_Q",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "https://post-project-jlrl.onrender.com/posts/66671918817886c5359e1d97",
+					"protocol": "https",
+					"host": [
+						"post-project-jlrl",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"posts",
+						"66671918817886c5359e1d97"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "修改單一貼文",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjZmOWI1M2U2YjZiNzQ2NjkxOTVlNCIsImlhdCI6MTcxODAyNjk1NiwiZXhwIjoxNzE4NjMxNzU2fQ.OCpf_qckj8NEHfPvKuEzXI6jupS2h-LhOoxSkg5UC_Q",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"content\":\"明天要上班QAQ\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://post-project-jlrl.onrender.com/posts/66671925817886c5359e1d9a",
+					"protocol": "https",
+					"host": [
+						"post-project-jlrl",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"posts",
+						"66671925817886c5359e1d9a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "註冊",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"采蓁\",\r\n    \"email\":\"test4@gmail.com\",\r\n    \"password\":\"12qwaszx\",\r\n    \"confirmPassword\":\"12qwaszx\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://post-project-jlrl.onrender.com/users/sign_up",
+					"protocol": "https",
+					"host": [
+						"post-project-jlrl",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"users",
+						"sign_up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "登入",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"test3@gmail.com\",\r\n    \"password\":\"12qwaszx\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://post-project-jlrl.onrender.com/users/sign_in",
+					"protocol": "https",
+					"host": [
+						"post-project-jlrl",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"users",
+						"sign_in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "取得個人資料",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjZmOWI1M2U2YjZiNzQ2NjkxOTVlNCIsImlhdCI6MTcxODAyNjk1NiwiZXhwIjoxNzE4NjMxNzU2fQ.OCpf_qckj8NEHfPvKuEzXI6jupS2h-LhOoxSkg5UC_Q",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://post-project-jlrl.onrender.com/users/profile",
+					"protocol": "https",
+					"host": [
+						"post-project-jlrl",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"users",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "更新個人資料",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjZmOWI1M2U2YjZiNzQ2NjkxOTVlNCIsImlhdCI6MTcxODAyNjk1NiwiZXhwIjoxNzE4NjMxNzU2fQ.OCpf_qckj8NEHfPvKuEzXI6jupS2h-LhOoxSkg5UC_Q",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"采蓁3\",\r\n    \"sex\":\"female\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://post-project-jlrl.onrender.com/users/profile",
+					"protocol": "https",
+					"host": [
+						"post-project-jlrl",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"users",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "重設密碼",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjZmOWI1M2U2YjZiNzQ2NjkxOTVlNCIsImlhdCI6MTcxODAyNjk1NiwiZXhwIjoxNzE4NjMxNzU2fQ.OCpf_qckj8NEHfPvKuEzXI6jupS2h-LhOoxSkg5UC_Q",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\":\"12qwaszx\",\r\n    \"confirmPassword\":\"12qwaszx\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://post-project-jlrl.onrender.com/users/updatePassword",
+					"protocol": "https",
+					"host": [
+						"post-project-jlrl",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"users",
+						"updatePassword"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
