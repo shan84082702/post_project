@@ -2,6 +2,8 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
+const dotenv = require("dotenv");
+dotenv.config({"path":"./config.env"});
 
 require("./connections");
 

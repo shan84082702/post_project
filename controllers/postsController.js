@@ -21,16 +21,12 @@ const postsController = {
         }
         const newPost = await Post.create(
             {
-                user: req.body.user,
+                user: req.user.id,
                 content: req.body.content.trim(),
                 photo: req.body.photo
             }
         );
-        const posts = await Post.find().populate({
-            path: 'user',
-            select: 'name photo'
-        });
-        successHandle(res,posts);
+        successHandle(res,newPost);
     },
 
     async deleteAllPosts(req, res, next){
@@ -39,41 +35,57 @@ const postsController = {
             return next(appError(400,"未填寫欲刪除之id"));
         }
 
-        await Post.deleteMany({});
-        successHandle(res,[]);
+        //刪除登入者的全部貼文
+        await Post.deleteMany({"user": req.user.id});
+
+        res.status(200).json({
+            status: "success",
+            message: "刪除所有貼文成功"
+        });
     },
 
     async deletePost(req, res, next){
         const id = req.params.id;
-        const deletePost = await Post.findByIdAndDelete(id);
+        const deletePost = await Post.findById(id).populate({
+            path: 'user',
+            select: 'id'
+        });
         if(deletePost === null){
             return next(appError(400,"查無此id"));
         }
-        const posts = await Post.find().populate({
-            path: 'user',
-            select: 'name photo'
+        if(deletePost.user.id !== req.user.id){
+            return next(appError(403,"無權刪除此貼文"));
+        }
+        await Post.findByIdAndDelete(id);
+        
+        res.status(200).json({
+            status: "success",
+            message: "刪除貼文成功"
         });
-        successHandle(res,posts);
     },
 
     async patchPost(req, res, next){
-        if(req.body.content === undefined || req.body.user === undefined){
-            return next(appError(400,"你沒有填寫 content 或 user資料"));
+        if(req.body.content === undefined){
+            return next(appError(400,"你沒有填寫content資料"));
         }
         const id = req.params.id;
+        const updatePost = await Post.findById(id).populate({
+            path: 'user',
+            select: 'id'
+        });
+        if(updatePost === null){
+            return next(appError(400,"查無此id"));
+        }
+        if(updatePost.user.id !== req.user.id){
+            return next(appError(403,"無權修改此貼文"));
+        }
         const updateData = {
-            user: req.body.user,
+            user: req.user.id,
             content: req.body.content.trim()
         }
-        const updatePost = await Post.findByIdAndUpdate(id,updateData,{new:true,runValidators:true});
-        if(updatePost === null){
-            return next(appError(400,"查無此ID"));
-        }
-        const posts = await Post.find().populate({
-            path: 'user',
-            select: 'name photo'
-        });
-        successHandle(res,posts);
+        const newPost = await Post.findByIdAndUpdate(id,updateData,{new:true,runValidators:true});
+        
+        successHandle(res,newPost);
     },
 };
 

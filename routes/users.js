@@ -9,7 +9,9 @@ router.post('/sign_up', handleErrorAsync(UserController.signUp));
 
 router.post('/sign_in',handleErrorAsync(UserController.signIn));
 
-router.get('/profile/',isAuth, handleErrorAsync(UserController.getProfile));
+router.get('/profile',isAuth, handleErrorAsync(UserController.getProfile));
+
+router.patch('/profile',isAuth, handleErrorAsync(UserController.updateProfile));
 
 router.post('/updatePassword',isAuth,handleErrorAsync(UserController.updatePassword));
 
