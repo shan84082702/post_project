@@ -334,6 +334,43 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "圖片上傳",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjZmOWI1M2U2YjZiNzQ2NjkxOTVlNCIsImlhdCI6MTcxODAyNjk1NiwiZXhwIjoxNzE4NjMxNzU2fQ.OCpf_qckj8NEHfPvKuEzXI6jupS2h-LhOoxSkg5UC_Q",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "files",
+							"type": "file",
+							"src": "/C:/Users/star850422/Desktop/仙人掌.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://post-project-jlrl.onrender.com/upload/image",
+					"protocol": "https",
+					"host": [
+						"post-project-jlrl",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"upload",
+						"image"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
