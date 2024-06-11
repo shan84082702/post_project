@@ -20,7 +20,7 @@ const isAuth = handleErrorAsync(async (req, res, next) => {
     const decoded = await new Promise((resolve,reject)=>{
       jwt.verify(token,process.env.JWT_SECRET,(err,payload)=>{
         if(err){
-          reject(err)
+          return next(appError(403,'token過期或格式錯誤',next));
         }else{
           resolve(payload)
         }

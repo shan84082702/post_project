@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const PostController = require("../controllers/postsController");
 const handleErrorAsync = require("../service/handleErrorAsync");
 const {isAuth,generateSendJWT} = require('../service/auth');
