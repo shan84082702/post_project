@@ -10,6 +10,7 @@ require("./connections");
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
 let postsRouter = require('./routes/posts');
+let uploadRouter = require('./routes/upload');
 
 let app = express();
 
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
+app.use('/upload', uploadRouter);
 
 // 404 錯誤
 app.use(function(req, res, next) {
@@ -75,6 +77,12 @@ app.use(function(err, req, res, next) {
     // production
     if (err.name === 'ValidationError'){
         err.message = "資料欄位未填寫正確，請重新輸入！"
+        err.isOperational = true;
+        return resErrorProd(err, res)
+    }
+    // production
+    else if (err.code === 'LIMIT_FILE_SIZE'){
+        err.message = "檔案過大"
         err.isOperational = true;
         return resErrorProd(err, res)
     }
