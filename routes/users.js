@@ -15,4 +15,14 @@ router.patch('/profile',isAuth, handleErrorAsync(UserController.updateProfile));
 
 router.post('/updatePassword',isAuth,handleErrorAsync(UserController.updatePassword));
 
+router.post('/:id/follow',isAuth,handleErrorAsync(UserController.follow));
+
+router.delete('/:id/unfollow',isAuth,handleErrorAsync(UserController.unfollow));
+
+router.get('/getLikeList',isAuth,handleErrorAsync(UserController.getLikeList));
+
+router.get('/getCommentList',isAuth,handleErrorAsync(UserController.getCommentList));
+
+router.get('/following',isAuth,handleErrorAsync(UserController.following));
+
 module.exports = router;

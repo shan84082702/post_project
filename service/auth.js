@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const appError = require('../service/appError'); 
 const handleErrorAsync = require('../service/handleErrorAsync');
 const User = require('../models/usersModel');
+const successHandle = require("./successHandle");
 const isAuth = handleErrorAsync(async (req, res, next) => {
     // 確認 token 是否存在
     let token;
@@ -37,13 +38,9 @@ const generateSendJWT= (user,statusCode,res)=>{
       expiresIn: process.env.JWT_EXPIRES_DAY
     });
     user.password = undefined;
-    res.status(statusCode).json({
-      status: 'success',
-      user:{
-        token,
-        name: user.name
-      }
-    });
+    
+    const result = { user: { token:token, name:user.name } };
+    successHandle(res,result);
   }
 
 module.exports = {

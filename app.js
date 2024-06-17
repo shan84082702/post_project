@@ -4,6 +4,7 @@ let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 const dotenv = require("dotenv");
 dotenv.config({"path":"./config.env"});
+const errorHandle = require("./service/errorHandle");
 
 require("./connections");
 
@@ -34,37 +35,31 @@ app.use('/upload', uploadRouter);
 
 // 404 錯誤
 app.use(function(req, res, next) {
-    res.status(404).json({
-        status: 'error',
-        message: "無此路由資訊",
-    });
+    const errorMessage =  { message: "無此路由資訊" };
+    errorHandle(res, 404, errorMessage);
 });
 
 // 自己設定的 err 錯誤 
 const resErrorProd = (err, res) => {
     if (err.isOperational) {
-        res.status(err.statusCode).json({
-            message: err.message
-        });
+        const errorMessage =  { message: err.message };
+        errorHandle(res, err.statusCode, errorMessage);
     } 
     else {
         // log 紀錄
         console.error('出現重大錯誤', err);
         // 送出罐頭預設訊息
-        res.status(500).json({
-            status: 'error',
-            message: '系統錯誤，請恰系統管理員'
-        });
+        const errorMessage =  { message: "系統錯誤，請洽系統管理員" };
+        errorHandle(res, 500, errorMessage);
     }
 };
 
 // 開發環境錯誤
 const resErrorDev = (err, res) => {
-    res.status(err.statusCode).json({
-        message: err.message,
-        error: err,
-        stack: err.stack
-    });
+    const errorMessage =  { message: err.message,
+                            error: err,
+                            stack: err.stack };
+    errorHandle(res, err.statusCode, errorMessage);
 };
 
 // 錯誤處理
@@ -83,6 +78,12 @@ app.use(function(err, req, res, next) {
     // production
     else if (err.code === 'LIMIT_FILE_SIZE'){
         err.message = "檔案過大"
+        err.isOperational = true;
+        return resErrorProd(err, res)
+    }
+    // production
+    else if (err.name === 'CastError'){
+        err.message = "id格式錯誤"
         err.isOperational = true;
         return resErrorProd(err, res)
     }
