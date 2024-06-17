@@ -4,7 +4,7 @@ function errorHandle(res, errorCode, errorMessage){
     res.writeHead(errorCode, headers);
     res.write(JSON.stringify({
         status: "fail",
-        message: errorMessage
+        ...errorMessage
     }))
     res.end()
 }

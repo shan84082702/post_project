@@ -1,13 +1,15 @@
 const User = require("../models/usersModel");
+const Post = require("../models/postsModel");
 const appError = require("../service/appError");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const validator = require('validator');
 const {isAuth,generateSendJWT} = require('../service/auth');
+const successHandle = require("../service/successHandle");
 
 const usersController = {
     async signUp(req, res, next) {
-        let { email, password,confirmPassword,name } = req.body;
+        let { email, password,confirmPassword,name,photo } = req.body;
         // 內容不可為空
         if(!email||!password||!confirmPassword||!name){
           return next(appError("400","欄位未填寫正確！",next));
@@ -37,13 +39,17 @@ const usersController = {
         if(user){
           return next(appError("400","此帳號已被註冊",next));
         }
+
+        console.log(photo);
         
+
         // 加密密碼
         password = await bcrypt.hash(req.body.password,12);
         const newUser = await User.create({
           email,
           password,
-          name
+          name,
+          photo
         });
         generateSendJWT(newUser,201,res);
     },
@@ -70,14 +76,12 @@ const usersController = {
     },
 
     async getProfile(req, res, next){
-        res.status(200).json({
-          status: 'success',
-          user: req.user
-        });
+        const result = { user: req.user };
+        successHandle(res,result);
     },
 
     async updateProfile(req, res, next){
-        let { name, sex } = req.body;
+        let { name, sex, photo } = req.body;
         // 內容不可為空
         if(!name || !sex){
           return next(appError("400","欄位未填寫正確！",next));
@@ -87,13 +91,26 @@ const usersController = {
           return next(appError("400","暱稱字數低於2個字",next));
         }
 
-        const updateUser = await User.findByIdAndUpdate(req.user.id,{name:name, sex:sex},{new:true,runValidators:true});
-        //const user = await User.findOne({"email":email});
-        res.status(200).json({
-          status: 'success',
-          user: updateUser
-        });
-  },
+        let updateData = { name:name, 
+                          sex:sex };
+        
+        //若有傳送photo欄位，photo資料也要更新
+        if(photo !== undefined){
+          if(!validator.isURL(photo)){
+            return next(appError("400","頭像URL未填寫正確！",next));
+          };
+          updateData = { name:name, 
+                         sex:sex,
+                         photo:photo };
+        }
+
+        const updateUser = await User.findByIdAndUpdate(req.user.id,updateData,{new:true,runValidators:true});
+
+        const result = { user: updateUser };
+        successHandle(res,result);
+
+        
+    },
 
     async updatePassword(req,res,next){
         const {password,confirmPassword } = req.body;
@@ -114,11 +131,116 @@ const usersController = {
         }
         newPassword = await bcrypt.hash(password,12);
         
-        const user = await User.findByIdAndUpdate(req.user.id,{
-          password:newPassword
-        });
+        const user = await User.findByIdAndUpdate(req.user.id,{ password:newPassword });
         generateSendJWT(user,200,res)
-    }
+    },
+
+    async follow(req,res,next){
+        if (req.params.id === req.user.id) {
+            return next(appError(401,'您無法追蹤自己',next));
+        }
+
+        const followUser = await User.findOne({"_id":req.params.id});
+        if(!followUser){
+            return next(appError(400,'無此用戶',next));
+        }
+
+        //檢查是否已追蹤
+        const isFollow = await User.findOne({_id: req.user.id,"following.user":{$eq:req.params.id}});
+        if(isFollow){
+          return next(appError(400,'已追蹤此用戶',next));
+        }
+
+        await User.updateOne(
+            {
+                _id: req.user.id,
+                'following.user': { $ne: req.params.id }
+            },
+            {
+                $addToSet: { following: { user: req.params.id } }
+            }
+        );
+        await User.updateOne(
+            {
+                _id: req.params.id,
+                'followers.user': { $ne: req.user.id }
+            },
+            {
+                $addToSet: { followers: { user: req.user.id } }
+            }
+        );
+        
+        const result = { message:"追蹤成功" };
+        successHandle(res,result);
+    },
+
+    async unfollow(req,res,next){
+        if (req.params.id === req.user.id) {
+            return next(appError(401,'您無法取消追蹤自己',next));
+        }
+
+        const follower = await User.findOne({"_id":req.params.id});
+        if(!follower){
+            return next(appError(400,'無此用戶',next));
+        }
+        
+        //檢查是否有追蹤
+        const isFollow = await User.findOne({_id: req.user.id,"following.user":{$eq:req.params.id}});
+        if(!isFollow){
+          return next(appError(400,'未追蹤此用戶',next));
+        }
+
+        await User.updateOne(
+            {
+                _id: req.user.id
+            },
+            {
+                $pull: { following: { user: req.params.id } }
+            }
+        );
+        await User.updateOne(
+            {
+                _id: req.params.id
+            },
+            {
+                $pull: { followers: { user: req.user.id } }
+            }
+        );
+
+        const result = { message: "成功取消追蹤" };
+        successHandle(res,result);
+    },
+
+    async getLikeList(req,res,next){
+        const likeList = await Post.find({ likes: { $in: [req.user.id] } })
+                                   .populate({ path:"user",
+                                                select:"name _id" })
+                                   .sort("-createdAt");
+
+        successHandle(res,likeList);
+    },
+
+    async getCommentList(req,res,next){
+      console.log(req.user.id);
+      const posts = await Post.find().populate({ path:"user",
+                                              select:"name _id" })
+                                      .populate({ path: 'comments',
+                                                  select: 'comment user' })
+                                      .sort("-createdAt");
+      const commentList = posts.filter(
+                            post => post.comments.some(
+                                                    comment => comment.user.equals(req.user.id)));
+      successHandle(res,commentList);
+  },
+
+    async following(req,res,next){
+      const followingList = await User.findById(req.user.id)
+                                      .select('following.user following.createdAt')
+                                      .populate({ path:"following.user",
+                                                  select:"name photo _id" });
+      const result = { user: req.user };
+      successHandle(res,followingList.following);
+    },
     
 }
 
