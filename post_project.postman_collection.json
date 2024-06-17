@@ -7,370 +7,746 @@
 	},
 	"item": [
 		{
-			"name": "取得所有貼文",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjZmOWI1M2U2YjZiNzQ2NjkxOTVlNCIsImlhdCI6MTcxODAyNjk1NiwiZXhwIjoxNzE4NjMxNzU2fQ.OCpf_qckj8NEHfPvKuEzXI6jupS2h-LhOoxSkg5UC_Q",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "https://post-project-jlrl.onrender.com/posts",
-					"protocol": "https",
-					"host": [
-						"post-project-jlrl",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"posts"
-					],
-					"query": [
-						{
-							"key": "timeSort",
-							"value": "desc",
-							"disabled": true
+			"name": "會員功能",
+			"item": [
+				{
+					"name": "註冊",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"采蓁\",\r\n    \"email\":\"test@gmail.com\",\r\n    \"password\":\"12qwaszx\",\r\n    \"confirmPassword\":\"12qwaszx\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
-						{
-							"key": "q",
-							"value": "奶茶",
-							"disabled": true
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/users/sign_up",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"users",
+								"sign_up"
+							]
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "新增單筆貼文",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjZmOWI1M2U2YjZiNzQ2NjkxOTVlNCIsImlhdCI6MTcxODAyNjk1NiwiZXhwIjoxNzE4NjMxNzU2fQ.OCpf_qckj8NEHfPvKuEzXI6jupS2h-LhOoxSkg5UC_Q",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"content\":\"明天要上班T_T\",\r\n    \"photo\":\"https://hips.hearstapps.com/hmg-prod/images/24411009-64ae617d83dcf.jpg?crop=0.733xw:1.00xh;0.139xw,0&resize=980:*\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+					},
+					"response": []
+				},
+				{
+					"name": "登入",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"shan@gmail.com\",\r\n    \"password\":\"12qwaszx\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/users/sign_in",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"users",
+								"sign_in"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://post-project-jlrl.onrender.com/posts",
-					"protocol": "https",
-					"host": [
-						"post-project-jlrl",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"posts"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "刪除登入者所有貼文",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjZmOWI1M2U2YjZiNzQ2NjkxOTVlNCIsImlhdCI6MTcxODAyNjk1NiwiZXhwIjoxNzE4NjMxNzU2fQ.OCpf_qckj8NEHfPvKuEzXI6jupS2h-LhOoxSkg5UC_Q",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": []
-				},
-				"url": {
-					"raw": "https://post-project-jlrl.onrender.com/posts",
-					"protocol": "https",
-					"host": [
-						"post-project-jlrl",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"posts"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "刪除單一貼文",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjZmOWI1M2U2YjZiNzQ2NjkxOTVlNCIsImlhdCI6MTcxODAyNjk1NiwiZXhwIjoxNzE4NjMxNzU2fQ.OCpf_qckj8NEHfPvKuEzXI6jupS2h-LhOoxSkg5UC_Q",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": []
-				},
-				"url": {
-					"raw": "https://post-project-jlrl.onrender.com/posts/66671918817886c5359e1d97",
-					"protocol": "https",
-					"host": [
-						"post-project-jlrl",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"posts",
-						"66671918817886c5359e1d97"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "修改單一貼文",
-			"request": {
-				"method": "PATCH",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjZmOWI1M2U2YjZiNzQ2NjkxOTVlNCIsImlhdCI6MTcxODAyNjk1NiwiZXhwIjoxNzE4NjMxNzU2fQ.OCpf_qckj8NEHfPvKuEzXI6jupS2h-LhOoxSkg5UC_Q",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"content\":\"明天要上班QAQ\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "重設密碼",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\":\"12qwaszx\",\r\n    \"confirmPassword\":\"12qwaszx\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/users/updatePassword",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"users",
+								"updatePassword"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://post-project-jlrl.onrender.com/posts/66671925817886c5359e1d9a",
-					"protocol": "https",
-					"host": [
-						"post-project-jlrl",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"posts",
-						"66671925817886c5359e1d9a"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "註冊",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"采蓁\",\r\n    \"email\":\"test4@gmail.com\",\r\n    \"password\":\"12qwaszx\",\r\n    \"confirmPassword\":\"12qwaszx\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "取得個人資料",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/users/profile",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"users",
+								"profile"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://post-project-jlrl.onrender.com/users/sign_up",
-					"protocol": "https",
-					"host": [
-						"post-project-jlrl",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"users",
-						"sign_up"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "登入",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"test3@gmail.com\",\r\n    \"password\":\"12qwaszx\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "更新個人資料",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"采蓁\",\r\n    \"sex\":\"female\",\r\n    \"photo\":\"https://storage.googleapis.com/posts-project-d827c.appspot.com/images/5766079f-06f9-4a84-b5d7-24afb89f24ab.png?GoogleAccessId=firebase-adminsdk-pjdpw%40posts-project-d827c.iam.gserviceaccount.com&Expires=16756646400&Signature=InPOLHQTR9Iq9FW3zP3HhbYzi7DEor7vtieVvyxz5clAZGI1OPbe1hxn7teAGkg9eHEkzpmsNlrs5rYlYjvJkcL8ChRp32crwtmU03WVfq4DDl1roHx73LUc3YCNPBWLPV5DUpma4d8jOt0vSN1X6%2FRIFf0Cu6lknN20OYp%2FU9ktsbFuYQL%2BvXpMiIE2Evaq66NjH1%2BeKk9HT11G5bO51pG8aJW9Kp5pr3GE7r7L3Sj05wcnBz6RJfLz%2BsGZ%2B1t3IZXAvaUKHAP5ppVUtHnSLqp6VjvjkiOLozUu16eF1oj%2BrE4vdPUcxzcmeWusFyW0og6F4IS8pA%2BR0qPBoLZZ9Q%3D%3D\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/users/profile",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"users",
+								"profile"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "https://post-project-jlrl.onrender.com/users/sign_in",
-					"protocol": "https",
-					"host": [
-						"post-project-jlrl",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"users",
-						"sign_in"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "取得個人資料",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjZmOWI1M2U2YjZiNzQ2NjkxOTVlNCIsImlhdCI6MTcxODAyNjk1NiwiZXhwIjoxNzE4NjMxNzU2fQ.OCpf_qckj8NEHfPvKuEzXI6jupS2h-LhOoxSkg5UC_Q",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "https://post-project-jlrl.onrender.com/users/profile",
-					"protocol": "https",
-					"host": [
-						"post-project-jlrl",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"users",
-						"profile"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "更新個人資料",
-			"request": {
-				"method": "PATCH",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjZmOWI1M2U2YjZiNzQ2NjkxOTVlNCIsImlhdCI6MTcxODAyNjk1NiwiZXhwIjoxNzE4NjMxNzU2fQ.OCpf_qckj8NEHfPvKuEzXI6jupS2h-LhOoxSkg5UC_Q",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"采蓁3\",\r\n    \"sex\":\"female\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "會員按讚追蹤動態",
+			"item": [
+				{
+					"name": "追蹤朋友",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/users/6667b19afea5ef8e69c8b5e0/follow",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"users",
+								"6667b19afea5ef8e69c8b5e0",
+								"follow"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://post-project-jlrl.onrender.com/users/profile",
-					"protocol": "https",
-					"host": [
-						"post-project-jlrl",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"users",
-						"profile"
-					]
+				{
+					"name": "取消追蹤朋友",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/users/666fdd8f3e4022a55c23a5d3/unfollow",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"users",
+								"666fdd8f3e4022a55c23a5d3",
+								"unfollow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得個人按讚列表",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/users/getLikeList",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"users",
+								"getLikeList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得個人追蹤列表",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/users/following",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"users",
+								"following"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得個人留言列表",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/users/getCommentList",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"users",
+								"getCommentList"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "重設密碼",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjZmOWI1M2U2YjZiNzQ2NjkxOTVlNCIsImlhdCI6MTcxODAyNjk1NiwiZXhwIjoxNzE4NjMxNzU2fQ.OCpf_qckj8NEHfPvKuEzXI6jupS2h-LhOoxSkg5UC_Q",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"password\":\"12qwaszx\",\r\n    \"confirmPassword\":\"12qwaszx\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "動態貼文",
+			"item": [
+				{
+					"name": "取得所有貼文",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/posts",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"posts"
+							],
+							"query": [
+								{
+									"key": "timeSort",
+									"value": "desc",
+									"disabled": true
+								},
+								{
+									"key": "q",
+									"value": "奶茶",
+									"disabled": true
+								}
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://post-project-jlrl.onrender.com/users/updatePassword",
-					"protocol": "https",
-					"host": [
-						"post-project-jlrl",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"users",
-						"updatePassword"
-					]
+				{
+					"name": "新增單筆貼文",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\":\"明天要上班T_T\",\r\n    \"photo\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/posts",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "新增一則貼文的讚",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/posts/66704501abd9fee289648b09/like",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"posts",
+								"66704501abd9fee289648b09",
+								"like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取消一則貼文的讚",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/posts/66704501abd9fee289648b09/like",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"posts",
+								"66704501abd9fee289648b09",
+								"like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "新增一則貼文的留言",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\":\"哇~\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/posts/667044edabd9fee289648b05/comment",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"posts",
+								"667044edabd9fee289648b05",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得個人所有貼文列表",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/posts/user/66703db3f76e77ae95911417",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"posts",
+								"user",
+								"66703db3f76e77ae95911417"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "取得單一貼文",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/posts/667044edabd9fee289648b05",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"posts",
+								"667044edabd9fee289648b05"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "刪除一則貼文的某個留言",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/posts/comment/6670460da6b07bb2350b52ea",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"posts",
+								"comment",
+								"6670460da6b07bb2350b52ea"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改一則貼文的某個留言",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\":\">///<\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/posts/comment/6670460da6b07bb2350b52ea",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"posts",
+								"comment",
+								"6670460da6b07bb2350b52ea"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "刪除登入者所有貼文",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/posts",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "刪除單一貼文",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/posts/66704a221a507db66b228380",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"posts",
+								"66704a221a507db66b228380"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "修改單一貼文",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\":\"好可愛哦~\",\r\n    \"photo\":\"https://storage.googleapis.com/posts-project-d827c.appspot.com/images/da7ad7cd-3a28-4675-9ff2-24805a0939cb.png?GoogleAccessId=firebase-adminsdk-pjdpw%40posts-project-d827c.iam.gserviceaccount.com&Expires=16756646400&Signature=PkTTq2aFA7mNYThmeUsmSfu%2FhKXF758ua%2BLhSGpafTQGzfNMQ634cWaE9iWVCfXak5b6fK8nS3%2BtUm7V5eFritlxH2Rm3gZjdl0W1pdj37pf0Anz%2Bz%2Fed72rBplrtDy2MPF5mFJVh4riAeDjEmXI1ELjTuMA46AGXAKgCalBBDAID%2BVmaZ1oLtohqHYd1MzvkOfZsaf%2Bi7AAfFfbnrUJyxk7lQWiEjsc0Q115NHDlFgJ9cr0MveqKDCMA2p6HgZlSK4wNYCaYDfj9t%2BZp1uWOsg7BLj2QeRaqqpN%2FXIJmByCwGXBoUxwVgSsg5%2FuorJOrX3BqkGfe2n%2BMEVF4Hvlig%3D%3D\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/posts/667044edabd9fee289648b05",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"posts",
+								"667044edabd9fee289648b05"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "圖片上傳",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NjZmOWI1M2U2YjZiNzQ2NjkxOTVlNCIsImlhdCI6MTcxODAyNjk1NiwiZXhwIjoxNzE4NjMxNzU2fQ.OCpf_qckj8NEHfPvKuEzXI6jupS2h-LhOoxSkg5UC_Q",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "files",
-							"type": "file",
-							"src": "/C:/Users/star850422/Desktop/仙人掌.jpg"
+			"name": "其他",
+			"item": [
+				{
+					"name": "圖片上傳",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "files",
+									"type": "file",
+									"src": "/C:/Users/TsaiChen/Desktop/星星.png"
+								},
+								{
+									"key": "type",
+									"value": "post",
+									"description": "user or post",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://post-project-jlrl.onrender.com/upload/image",
+							"protocol": "https",
+							"host": [
+								"post-project-jlrl",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"upload",
+								"image"
+							]
 						}
-					]
-				},
-				"url": {
-					"raw": "https://post-project-jlrl.onrender.com/upload/image",
-					"protocol": "https",
-					"host": [
-						"post-project-jlrl",
-						"onrender",
-						"com"
-					],
-					"path": [
-						"upload",
-						"image"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }
